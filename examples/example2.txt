@@ -1,0 +1,9 @@
+// Example 2: Complex expressions with parentheses
+let a = 5;
+let b = 10;
+let c = (a + b) * 2;
+let d = c / 3;
+print(a);
+print(b);
+print(c);
+print(d);

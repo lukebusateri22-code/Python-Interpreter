@@ -1,0 +1,16 @@
+// Example 3: Chained operations
+let num1 = 100;
+let num2 = 50;
+let sum = num1 + num2;
+let diff = num1 - num2;
+let product = num1 * num2;
+let quotient = num1 / num2;
+
+print(sum);
+print(diff);
+print(product);
+print(quotient);
+
+// Using previous results
+let result = sum + diff - product / quotient;
+print(result);

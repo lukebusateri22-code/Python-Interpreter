@@ -1,0 +1,5 @@
+// Example 1: Basic arithmetic and variable assignment
+let x = 10 + 5;
+let y = x * 2;
+print(x);
+print(y);

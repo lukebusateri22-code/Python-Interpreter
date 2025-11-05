@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Interpreter - CS 390 Project</title>
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-code"></i> Python Interpreter</h1>
+                <p class="subtitle">CS 390 Final Project - Interactive Code Editor</p>
+            </div>
+            <div class="header-buttons">
+                <button id="runBtn" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+                <button id="clearBtn" class="btn btn-secondary">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+                <button id="tokenizeBtn" class="btn btn-info">
+                    <i class="fas fa-list"></i> Show Tokens
+                </button>
+                <button id="astBtn" class="btn btn-info">
+                    <i class="fas fa-project-diagram"></i> Show AST
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel: Code Editor -->
+            <div class="panel editor-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-edit"></i> Code Editor</h2>
+                    <div class="example-dropdown">
+                        <button id="examplesBtn" class="btn btn-small">
+                            <i class="fas fa-book"></i> Load Example
+                        </button>
+                        <div id="examplesMenu" class="dropdown-menu">
+                            <!-- Examples will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <textarea id="codeEditor" class="code-editor" placeholder="// Write your code here...">// Welcome to the Python Interpreter!
+// Try running this example code
+
+let x = 10 + 5;
+let y = x * 2;
+print(x);
+print(y);</textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="charCount">0 characters</span>
+                    <span id="lineCount">1 lines</span>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output & Variables -->
+            <div class="right-panels">
+                <!-- Output Panel -->
+                <div class="panel output-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-terminal"></i> Output</h2>
+                        <button id="clearOutputBtn" class="btn btn-small">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                    <div id="output" class="output-content">
+                        <div class="output-placeholder">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Click "Run Code" to see output here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symbol Table Panel -->
+                <div class="panel variables-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-database"></i> Variables</h2>
+                    </div>
+                    <div id="symbolTable" class="symbol-table">
+                        <div class="output-placeholder">
+                            <i class="fas fa-cube"></i>
+                            <p>Variables will appear here after execution</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Execution Timeline -->
+        <div class="timeline-section">
+            <div class="panel timeline-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-clock"></i> Execution Timeline</h2>
+                    <div class="timeline-controls">
+                        <button id="timelinePrevBtn" class="btn btn-small" disabled>
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button id="timelinePlayBtn" class="btn btn-small">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="timelineNextBtn" class="btn btn-small" disabled>
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <span id="timelineStep" class="timeline-step-info">Step 0 / 0</span>
+                    </div>
+                </div>
+                <div id="timeline" class="timeline-content">
+                    <div class="output-placeholder">
+                        <i class="fas fa-history"></i>
+                        <p>Execution steps will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tokens Modal -->
+        <div id="tokensModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-list"></i> Token Stream</h2>
+                    <button class="close-btn" onclick="closeTokensModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="tokensContent" class="tokens-content">
+                    <!-- Tokens will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- AST Modal -->
+        <div id="astModal" class="modal">
+            <div class="modal-content modal-large">
+                <div class="modal-header">
+                    <h2><i class="fas fa-project-diagram"></i> Abstract Syntax Tree</h2>
+                    <button class="close-btn" onclick="closeASTModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="astContent" class="ast-content">
+                    <!-- AST will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                <i class="fas fa-graduation-cap"></i> CS 390 Final Project | 
+                Built with <i class="fas fa-heart" style="color: #e74c3c;"></i> | 
+                <a href="https://github.com" target="_blank">
+                    <i class="fab fa-github"></i> View Documentation
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Executing code...</p>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
