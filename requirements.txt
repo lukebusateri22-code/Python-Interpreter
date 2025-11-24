@@ -2,15 +2,16 @@
 
 # Python version required: 3.6 or higher
 
+# Web interface requires Flask, core interpreter uses only standard library
+
+# Web server dependency
+flask==2.3.3
+
 # To verify your Python version:
 # python3 --version
 
-# Core dependencies for CLI:
+# Core interpreter modules use only Python standard library:
 # - enum (for TokenType enumeration)
 # - sys (for command-line arguments)
 # - unittest (for testing)
-# - re (imported but not actively used, can be removed)
-
-# Web interface dependencies:
-Flask==2.3.0
-Werkzeug==2.3.0
+# - io (for output capture in web interface)

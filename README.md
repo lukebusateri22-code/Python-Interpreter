@@ -1,27 +1,21 @@
 # Python Interpreter - CS 390 Final Project
 
-A fully functioning interpreter built in Python that can parse and execute a simple programming language. This interpreter supports variable assignments, arithmetic operations, and print statements through a three-stage architecture: lexical analysis, parsing, and interpretation.
+A fully functioning interpreter built in Python with a modern web interface. This interpreter supports variable assignments, arithmetic operations, and print statements through a three-stage architecture: lexical analysis, parsing, and interpretation.
 
 [![Python Version](https://img.shields.io/badge/python-3.6%2B-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-Educational-green.svg)](LICENSE)
-
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Language Syntax](#language-syntax)
-- [Architecture](#architecture)
-- [Examples](#examples)
-- [Testing](#testing)
-- [Documentation](#documentation)
+[![Web Interface](https://img.shields.io/badge/web-interface-FF6B6B.svg)](http://localhost:5000)
 
 ## ✨ Features
 
+- **Modern Web Interface**: Beautiful, tech-themed frontend with gradients and animations
+- **Interactive Code Editor**: Syntax highlighting, line numbers, and real-time execution
+- **Variable Inspector**: Live symbol table visualization
+- **Token Viewer**: See the lexical analysis process
 - **Variable Assignments**: Define and use variables with the `let` keyword
 - **Arithmetic Operations**: Support for `+`, `-`, `*`, `/` operators
-- **Operator Precedence**: Correct handling of mathematical precedence (multiplication/division before addition/subtraction)
-- **Parentheses**: Support for grouping expressions with parentheses
+- **Operator Precedence**: Correct handling of mathematical precedence
+- **Parentheses**: Support for grouping expressions
 - **Print Statements**: Display variable values and expression results
 - **Error Handling**: Clear error messages with line and column information
 - **Comments**: Single-line comments using `//`
@@ -30,22 +24,36 @@ A fully functioning interpreter built in Python that can parse and execute a sim
 
 ## 🚀 Quick Start
 
+### Web Interface (Recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/lukebusateri22-code/Python-Interpreter.git
 cd Python-Interpreter
 
-# Run an example program
-python main.py examples/example1.txt
+# Install Flask
+pip3 install flask
 
-# Or start the interactive REPL
-python main.py
+# Start the web server
+python3 web_app.py
 
-# Run tests
-python test_interpreter.py
+# Open your browser and go to: http://localhost:5000
 ```
 
-**Requirements:** Python 3.6 or higher (no external dependencies!)
+### Command Line Interface
+
+```bash
+# Run an example program
+python3 main.py examples/example1.txt
+
+# Or start the interactive REPL
+python3 main.py
+
+# Run tests
+python3 test_interpreter.py
+```
+
+**Requirements:** Python 3.6 or higher (Flask required for web interface)
 
 ## 📁 Project Structure
 

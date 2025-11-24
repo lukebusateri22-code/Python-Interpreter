@@ -39,7 +39,7 @@ env/
 htmlcov/
 
 # Archive folder
-archive/
+# archive/
 
 # Temporary files
 *.tmp
