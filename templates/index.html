@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Interpreter - CS 390 Final Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <i class="fas fa-code"></i>
+                <h1>Python Interpreter</h1>
+            </div>
+            <p class="subtitle">CS 390 Final Project - Interactive Code Editor</p>
+            <div class="header-buttons">
+                <button id="runBtn" class="btn btn-run">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+                <button id="clearBtn" class="btn btn-clear">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+                <button id="showTokensBtn" class="btn btn-tokens">
+                    <i class="fas fa-list"></i> Show Tokens
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel: Code Editor -->
+            <div class="editor-section">
+                <div class="panel-header">
+                    <h2><i class="fas fa-edit"></i> Code Editor</h2>
+                    <button id="loadExampleBtn" class="btn btn-small">
+                        <i class="fas fa-file-code"></i> Load Example
+                    </button>
+                </div>
+                <div class="editor-container">
+                    <div class="line-numbers" id="lineNumbers">1</div>
+                    <textarea id="codeEditor" spellcheck="false" placeholder="// Using variables in expressions
+let num1 = 100;
+let num2 = 50;
+let sum = num1 + num2;
+let diff = num1 - num2;
+let product = num1 * num2;
+let quotient = num1 / num2;
+
+print(sum);
+print(diff);
+print(product);
+print(quotient);
+
+let result = sum + diff - product / quotient;
+print(result);"></textarea>
+                </div>
+                <div class="editor-footer">
+                    <span id="charCount">632 characters</span>
+                    <span id="lineCount">7 lines</span>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output & Variables -->
+            <div class="output-section">
+                <!-- Output Panel -->
+                <div class="output-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-terminal"></i> Output</h2>
+                        <button id="clearOutputBtn" class="btn btn-small">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                    <div class="output-display" id="output">
+                        <div class="empty-state">
+                            <i class="fas fa-info-circle"></i>
+                            <p>Click "Run Code" to see output here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variables Panel -->
+                <div class="variables-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-database"></i> Variables</h2>
+                    </div>
+                    <div class="variables-display" id="variables">
+                        <div class="empty-state">
+                            <i class="fas fa-cube"></i>
+                            <p>Variables will appear here after execution</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tokens Modal -->
+    <div id="tokensModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-list"></i> Token Stream</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="tokensDisplay">
+                <!-- Tokens will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Examples Modal -->
+    <div id="examplesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-code"></i> Load Example</h2>
+                <button class="modal-close" id="closeExamplesModal">&times;</button>
+            </div>
+            <div class="modal-body" id="examplesDisplay">
+                <!-- Examples will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
