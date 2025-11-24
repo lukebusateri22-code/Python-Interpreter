@@ -213,7 +213,16 @@ async function showAST() {
 
 // Display Output
 function displayOutput(outputText) {
-    if (!outputText || outputText.trim() === '') {
+    // Handle both array and string inputs
+    let lines = [];
+    
+    if (Array.isArray(outputText)) {
+        lines = outputText;
+    } else if (typeof outputText === 'string') {
+        lines = outputText.trim().split('\n');
+    }
+    
+    if (!lines || lines.length === 0) {
         output.innerHTML = `
             <div class="output-placeholder">
                 <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
@@ -223,9 +232,8 @@ function displayOutput(outputText) {
         return;
     }
     
-    const lines = outputText.trim().split('\n');
     output.innerHTML = lines.map(line => 
-        `<div class="output-line">${escapeHtml(line)}</div>`
+        `<div class="output-line">${escapeHtml(String(line))}</div>`
     ).join('');
 }
 

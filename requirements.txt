@@ -1,14 +1,16 @@
 # Python Interpreter - CS 390 Final Project
-# No external dependencies required!
-# This project uses only Python standard library.
 
 # Python version required: 3.6 or higher
 
 # To verify your Python version:
 # python3 --version
 
-# All modules used are part of the Python standard library:
+# Core dependencies for CLI:
 # - enum (for TokenType enumeration)
 # - sys (for command-line arguments)
 # - unittest (for testing)
 # - re (imported but not actively used, can be removed)
+
+# Web interface dependencies:
+Flask==2.3.0
+Werkzeug==2.3.0
